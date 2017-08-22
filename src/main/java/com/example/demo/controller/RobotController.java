@@ -6,7 +6,6 @@ import com.example.demo.service.RobotService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -25,8 +24,8 @@ public class RobotController {
     }
 
     @RequestMapping(value = "/robot", method = RequestMethod.POST)
-    public ResponseEntity<RobotResponse> test(@RequestBody RobotRequest robotRequest){
-        RobotResponse robotResponse = robotService.doSomething(robotRequest);
+    public ResponseEntity<RobotResponse> processRequest(@RequestBody RobotRequest robotRequest){
+        RobotResponse robotResponse = robotService.doRequest(robotRequest);
         return new ResponseEntity<RobotResponse>(robotResponse, HttpStatus.OK);
     }
 

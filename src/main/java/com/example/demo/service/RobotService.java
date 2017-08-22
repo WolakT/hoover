@@ -15,12 +15,11 @@ import org.springframework.stereotype.Service;
 @Service
 public class RobotService {
 
-    public RobotResponse doSomething(RobotRequest robotRequest){
+    public RobotResponse doRequest(RobotRequest robotRequest){
         RobotResponse robotResponse = new RobotResponse();
         Robot robot = new Robot(robotRequest);
         int[] coords = robot.cleanTheRoom();
         robotResponse.setPatches(robot.getCleanedPatches());
-
         robotResponse.setCoords(coords);
         return robotResponse;
     }

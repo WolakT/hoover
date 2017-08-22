@@ -1,6 +1,8 @@
 package com.example.demo.dto;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by RENT on 2017-08-21.
@@ -8,7 +10,7 @@ import java.util.List;
 public class Robot{
     private RobotRequest robotRequest;
     private int[] currentLocation;
-    private Percolation perc;
+    private Set<Point> setPatches = new HashSet<>();
     private int cleanedPatches;
 
     public int getCleanedPatches() {
@@ -18,8 +20,11 @@ public class Robot{
     public Robot(RobotRequest robotRequest){
         this.robotRequest = robotRequest;
         currentLocation = robotRequest.getCoords();
-        perc = new Percolation(robotRequest.getRoomSize()[0]);
-        perc.open(robotRequest.getCoords()[0],robotRequest.getCoords()[1]);
+        for (int i = 0; i < robotRequest.getPatches().length; i++) {
+            int x = robotRequest.getPatches()[i][0];
+            int y = robotRequest.getPatches()[i][1];
+            setPatches.add(new Point(x,y));
+        }
 
     }
 
@@ -36,7 +41,7 @@ public class Robot{
         switch (direction){
 
             case "N": currentLocation[1]++;
-            perc.open();
+
             break;
             case "S": currentLocation[1]--;
             break;
@@ -45,22 +50,39 @@ public class Robot{
             case "W": currentLocation[0]--;
 
         }
+        checkBoundries();
         return currentLocation;
     }
 
+    private void checkBoundries(){
+        int boundriesX = robotRequest.getRoomSize()[0];
+        int boundriesY = robotRequest.getRoomSize()[1];
+        if(currentLocation[0]>boundriesX){
+            currentLocation[0] = boundriesX;
+        } else if(currentLocation[1]>boundriesY){
+            currentLocation[1] = boundriesY;
+        } else if (currentLocation[0]<0){
+            currentLocation[0]=0;
+        }else if (currentLocation[1]<0) {
+            currentLocation[1] = 0;
+
+
+        }
+
+    }
     private int convert(int row, int column) {
         // System.out.println(row*N+(column-N-1));
         return row * robotRequest.getRoomSize()[0] + (column - robotRequest.getRoomSize()[1] - 1);
     }
     private boolean isPatchCleaned(){
-        for (int i = 0; i < robotRequest.getPatches().length; i++) {
-
-            if(currentLocation[0] == robotRequest.getPatches()[i][0] &&
-                    currentLocation[1] == robotRequest.getPatches()[i][1]){
-                return true;
-            }
-
+        int locationX = currentLocation[0];
+        int locationY = currentLocation[1];
+        Point locationPoint = new Point(locationX,locationY);
+        if(setPatches.contains(locationPoint)){
+            setPatches.remove(locationPoint);
+            return true;
+        } else {
+            return false;
         }
-        return false;
     }
 }

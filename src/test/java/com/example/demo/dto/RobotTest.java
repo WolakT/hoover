@@ -26,7 +26,8 @@ public class RobotTest {
         int[] coords = {0,0};
         testRequest = new RobotRequest();
         testRequest.setCoords(coords);
-
+        int[] roomS = {5,5};
+        testRequest.setRoomSize(roomS);
         int[][] patches = new int[][]{
                 {1,1},
                 {2,2}
@@ -44,6 +45,19 @@ public class RobotTest {
 
         Assert.assertEquals(correctPos[1],resultPos[1]);
         Assert.assertEquals(correctPos[0],resultPos[0]);
+        Assert.assertArrayEquals(correctPos,resultPos);
+    }
+
+    @Test
+    public void shouldReturnCorrectPositionWithDifferentPath(){
+        testRequest.setInstructions("NENNSW");
+        testRobot = new Robot(testRequest);
+        int[] correctPos = {0,2};
+        int[] resultPos = testRobot.cleanTheRoom();
+
+        Assert.assertEquals(correctPos[1],resultPos[1]);
+        Assert.assertEquals(correctPos[0],resultPos[0]);
+        Assert.assertArrayEquals(correctPos,resultPos);
     }
 
     @Test
@@ -62,11 +76,10 @@ public class RobotTest {
         testRequest.setInstructions("S");
         testRobot = new Robot(testRequest);
 
-        int[] correctPos = {0,1};
+        int[] correctPos = {0,0};
         int result[] = testRobot.cleanTheRoom();
 
-        Assert.assertEquals(correctPos[1],result[1]);
-        Assert.assertEquals(correctPos[0],result[0]);
+        Assert.assertArrayEquals(correctPos,result);
     }
 
 }
