@@ -1,13 +1,15 @@
-package com.example.demo.dto;
+package com.example.demo.service;
+
+import com.example.demo.dto.RobotRequest;
+import com.example.demo.model.Point;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 /**
  * Created by RENT on 2017-08-21.
  */
-public class Robot{
+ public class Robot{
     private RobotRequest robotRequest;
     private int[] currentLocation;
     private Set<Point> setPatches = new HashSet<>();

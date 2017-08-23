@@ -1,4 +1,4 @@
-package com.example.demo.dto;
+package com.example.demo.model;
 
 /**
  * Created by RENT on 2017-08-22.

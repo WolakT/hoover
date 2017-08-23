@@ -1,21 +1,15 @@
 package com.example.demo.service;
 
-import com.example.demo.dto.Robot;
 import com.example.demo.dto.RobotRequest;
 import com.example.demo.dto.RobotResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Mock;
-import org.mockito.Mockito;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.Scanner;
-
-import static org.junit.Assert.*;
-import static org.mockito.MockitoAnnotations.initMocks;
 
 /**
  * Created by RENT on 2017-08-22.
@@ -52,6 +46,8 @@ public class RobotServiceTest {
         Assert.assertArrayEquals(expectedResponse.getCoords(),resultResponse.getCoords());
         Assert.assertEquals(expectedResponse.getPatches(), resultResponse.getPatches());
     }
+
+
 
     private RobotRequest createTestRequest() throws IOException {
         String requestAsJson = readAsString("src\\test\\resource\\request.json");

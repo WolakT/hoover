@@ -1,12 +1,21 @@
 package com.example.demo.dto;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+
 /**
  * Created by Tomcio on 2017-08-20.
  */
 public class RobotRequest {
+
+    @Size(min = 2, max =2)
     private int[] roomSize;
+    @Size(min = 2, max =2)
     private int[] coords;
+    @NotNull
     private int[][] patches;
+    @Pattern(regexp = "[NEWS]*")
     private String instructions;
 
     public RobotRequest(){}
