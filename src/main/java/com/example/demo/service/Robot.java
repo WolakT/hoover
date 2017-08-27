@@ -12,6 +12,7 @@ import java.util.Set;
  public class Robot{
     private RobotRequest robotRequest;
     private int[] currentLocation;
+    private int[][] allLocations;
     private Set<Point> setPatches = new HashSet<>();
     private int cleanedPatches;
 
@@ -30,10 +31,15 @@ import java.util.Set;
 
     }
 
+    public int[][] getAllLocations() {
+        return allLocations;
+    }
+
     public int[] cleanTheRoom(){
         String[] directions = robotRequest.getInstructions().split("");
+        allLocations = new int[directions.length][2];
         for (int i = 0; i < directions.length; i++) {
-            makeStep(directions[i]);
+            allLocations[i] = makeStep(directions[i]);
             if(isPatchCleaned()) cleanedPatches++;
         }
         return currentLocation;

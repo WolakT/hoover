@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import com.example.demo.dto.RobotRequest;
 import com.example.demo.dto.RobotResponse;
+import com.example.demo.repositiory.RobotRepository;
 import com.example.demo.service.RobotService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Before;
@@ -27,6 +28,9 @@ public class RobotControllerTest {
     @Mock
     private RobotService robotService;
 
+    @Mock
+    private RobotRepository robotRepository;
+
     @Before
     public void setUP() {
         initMocks(this);
@@ -44,7 +48,7 @@ public class RobotControllerTest {
         RobotResponse robotResponse = new RobotResponse();
         robotResponse.setPatches(1);
         Mockito.when(robotService.doRequest(robotRequest)).thenReturn(robotResponse);
-        robotController = new RobotController(robotService);
+        robotController = new RobotController(robotService, robotRepository);
         robotController.processRequest(robotRequest);
 
         Mockito.verify(robotService,Mockito.times(1)).doRequest(robotRequest);

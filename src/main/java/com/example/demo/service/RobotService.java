@@ -2,6 +2,7 @@ package com.example.demo.service;
 
 import com.example.demo.dto.RobotRequest;
 import com.example.demo.dto.RobotResponse;
+import com.example.demo.view.RobotView;
 import org.springframework.stereotype.Service;
 
 /**
@@ -17,8 +18,8 @@ public class RobotService {
         int[] coords = robot.cleanTheRoom();
         robotResponse.setPatches(robot.getCleanedPatches());
         robotResponse.setCoords(coords);
+//        RobotView robotView = new RobotView();
+//        robotView.drawRobotRequest(robotRequest, robot.getAllLocations());
         return robotResponse;
     }
-
-
 }

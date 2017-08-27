@@ -26,8 +26,9 @@ public class RobotController {
     private RobotRepository robotRepository;
 
     @Autowired
-    public RobotController(RobotService robotService){
+    public RobotController(RobotService robotService, RobotRepository robotRepository){
         this.robotService = robotService;
+        this.robotRepository = robotRepository;
     }
 
     @RequestMapping(value = "/robot", method = RequestMethod.POST)
